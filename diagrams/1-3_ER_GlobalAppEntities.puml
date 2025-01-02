@@ -1,0 +1,35 @@
+@startuml
+entity User {
+  *id : Long
+  --
+  username : String
+  email : String
+  password : String
+}
+
+entity HeatingSystem {
+  *id : Long
+  --
+  name : String
+  status : String
+  target_temperature : Double
+  current_temperature : Double
+}
+
+entity TemperatureLog {
+  *id : Long
+  --
+  heating_system_id : Long
+  timestamp : Date
+  temperature : Double
+}
+
+entity UserHeatingSystem {
+  *user_id : Long
+  *heating_system_id : Long
+}
+
+User ||--o{ UserHeatingSystem : uses
+HeatingSystem ||--o{ UserHeatingSystem : used_by
+HeatingSystem ||--o{ TemperatureLog : logs
+@enduml
